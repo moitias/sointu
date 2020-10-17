@@ -1,0 +1,53 @@
+/* initial reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* set up basic fonts and colors */
+html {
+    font-family: VT323,monospace;
+    line-height: 0.9em;
+    font-size: 20px;
+    background: black;
+    color: white;
+}
+
+/* editable fields */
+div[contenteditable$="true"] {
+    outline: none;
+}
+
+div[contenteditable$="true"]:focus {
+}
+
+/* text styles */
+.text-shadow {
+    text-shadow: 1px 1px 0 black;
+}
+
+/* component styles */
+.frame {
+    background: #497582;
+}
+
+.raised {
+    border-left: 2px solid #8ADBF3;
+    border-top: 2px solid #8ADBF3;
+    border-right: 2px solid #18282C;
+    border-bottom: 2px solid #18282C;
+}
+
+.lowered {
+    border-right: 1px solid #8ADBF3;
+    border-bottom: 1px solid #8ADBF3;
+    border-left: 1px solid #18282C;
+    border-top: 1px solid #18282C;
+}

@@ -1,0 +1,3 @@
+<div>
+	INSTRUMENT DETAILS
+</div>
