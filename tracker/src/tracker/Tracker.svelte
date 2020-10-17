@@ -1,43 +1,20 @@
 <script lang="ts">
   import Hotkey from "../components/Hotkey.svelte";
+  import TrackDisplay from "./TrackDisplay.svelte";
+  import { trackCount, trackWidth } from "./constants";
+  import { cursorRow, cursorTrack, cursorTrackColumn, changeRow, changeTrackColumn, changeTrack } from "./store";
+  import { derived, writable } from "svelte/store";
 
-  const rowCount = 64;
-  const trackCount = 4;
-  const trackColumnCount = 3;
+  let trackerHeight = writable(0);
 
-  let cursorRow = 0;
-  let cursorTrack = 0;
-  let cursorTrackColumn = 0;
+  let scrollTop = derived([cursorRow, trackerHeight], ([$row,$height]) => {
+    return ($height/2 - 8) - $row * 16 -2;
+  });
 
-  function changeRow(delta: Number) {
-    cursorRow = ((cursorRow + delta) + rowCount) % rowCount;
-  }
+  let scrollLeft = 0;
 
-  function changeTrack(delta: Number) {
-    cursorTrack = ((cursorTrack + delta) + trackCount) % trackCount;
-    cursorTrackColumn = 0;
-  }
+  const tracks = [...new Array(trackCount)].map((_, i) => i);
 
-  function changeTrackColumn(delta: Number) {
-    let newTrackColumn = (cursorTrackColumn + delta);
-    while (newTrackColumn < 0) {
-      if (cursorTrack === 0) {
-        cursorTrack = trackCount - 1;
-      } else {
-        cursorTrack--;
-      }
-      newTrackColumn += trackColumnCount;
-    }
-    while (newTrackColumn >= trackColumnCount) {
-      if (cursorTrack >= trackCount - 1) {
-        cursorTrack = 0;
-      } else {
-        cursorTrack++;
-      }
-      newTrackColumn -= trackColumnCount;
-    }
-    cursorTrackColumn = newTrackColumn;
-  }
 
 </script>
 
@@ -47,6 +24,35 @@
 <Hotkey key="ArrowRight" on:click={() => changeTrackColumn(1)}/>
 <Hotkey key="Tab" modifier="shift" on:click={() => changeTrack(-1)}/>
 <Hotkey key="Tab" on:click={() => changeTrack(1)}/>
-<div>
-	TRACKER { cursorRow } { cursorTrack }/{cursorTrackColumn}
+<div class="raised h-full">
+	<div class="lowered black text-highlight h-full relative clip" bind:clientHeight={$trackerHeight}>
+		{#each tracks as track}
+			<div class="absolute lowered h-full lowered"
+					 style="
+					 	 left: {`${track*trackWidth + scrollLeft}px`};
+					 	 width: {`${trackWidth}px`};
+					 ">
+
+			</div>
+			<div class="absolute"
+					 style="
+					 	 left: {`${track*trackWidth + scrollLeft}px`};
+					 	 top: {`${$scrollTop}px`};
+					 	 width: {`${trackWidth-2}px`};
+					 ">
+				<TrackDisplay track={track}/>
+			</div>
+			<div class="absolute text-white"
+					 style="
+					 	 left: {`${track*trackWidth + scrollLeft + 3}px`};
+					 	 top: 0`};
+					 ">
+				{ track }
+			</div>
+		{/each}
+		<div class="absolute v-center w-full frame raised-v-narrow">
+			abss
+		</div>
+		TRACKER { $cursorRow } { $cursorTrack }/{$cursorTrackColumn}
+	</div>
 </div>

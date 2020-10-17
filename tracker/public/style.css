@@ -38,6 +38,18 @@ div[contenteditable$="true"]:focus {
     background: #497582;
 }
 
+.black {
+    background: black;
+}
+
+.text-highlight {
+    color: #FFFF82;
+}
+
+.text-white {
+    color: white;
+}
+
 .raised {
     border-left: 2px solid #8ADBF3;
     border-top: 2px solid #8ADBF3;
@@ -45,9 +57,49 @@ div[contenteditable$="true"]:focus {
     border-bottom: 2px solid #18282C;
 }
 
+.raised-v {
+    border-top: 2px solid #8ADBF3;
+    border-bottom: 2px solid #18282C;
+}
+
+.raised-v-narrow {
+    border-top: 1px solid #8ADBF3;
+    border-bottom: 1px solid #18282C;
+}
+
 .lowered {
     border-right: 1px solid #8ADBF3;
     border-bottom: 1px solid #8ADBF3;
     border-left: 1px solid #18282C;
     border-top: 1px solid #18282C;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.clip {
+    overflow: hidden;
+}
+
+.v-center {
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+.h-center {
+    left: 50%;
+    transform: translate(-50%,0);
 }
