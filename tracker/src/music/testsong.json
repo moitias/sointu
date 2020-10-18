@@ -4,11 +4,17 @@
 	"instruments": [
 		{
 			"name": "sine",
-			"program": "osc(sin);out"
+			"program": [
+				"osc(sin)",
+				"out"
+			]
 		},
 		{
 			"name": "saw",
-			"program": "osc(saw);out"
+			"program": [
+				"osc(saw)",
+				"out"
+			]
 		}
 	],
 	"patterns": [
