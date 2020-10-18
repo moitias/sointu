@@ -96,10 +96,14 @@ div[contenteditable$="true"]:focus {
 
 .v-center {
     top: 50%;
-    transform: translate(0,-50%);
+    transform: translate(0, -50%);
 }
 
 .h-center {
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
+}
+
+.flex {
+    display: flex;
 }

@@ -83,21 +83,18 @@
 <Hotkey key="Tab" on:click={() => changeTrack(1)}/>
 <div class="raised h-full">
 	<div class="lowered black text-highlight h-full relative clip" bind:clientHeight={$trackerHeight}>
+		<TrackerCursor/>
 		{#each tracks as track}
-			<div class="absolute lowered h-full lowered"
+			<div class="absolute lowered"
 					 style="
 					 	 left: {`${track*trackWidth + scrollLeft}px`};
 					 	 width: {`${trackWidth}px`};
 					 ">
-
-			</div>
-			<div class="absolute"
-					 style="
-					 	 left: {`${track*trackWidth + scrollLeft}px`};
-					 	 top: {`${$scrollTop}px`};
-					 	 width: {`${trackWidth-2}px`};
+				<div style="
+					 	 margin-top: {`${$scrollTop}px`};
 					 ">
-				<TrackDisplay track={track}/>
+					<TrackDisplay track={track}/>
+				</div>
 			</div>
 			<div class="absolute text-white"
 					 style="
@@ -107,6 +104,5 @@
 				{ track }
 			</div>
 		{/each}
-		<TrackerCursor/>
 	</div>
 </div>
