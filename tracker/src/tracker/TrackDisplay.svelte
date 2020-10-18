@@ -12,40 +12,41 @@
     return $cursor === track;
   });
 
-  const data = patterns[$displayPattern]?.tracks[track] || [];
+  // grab a reference to the reactive track
+  const data = patterns[$displayPattern].tracks[track];
 
-  function formatDataValue(column, data) {
+  function formatDataValue(column, value) {
     switch (column) {
       case "note":
-        if (data === null) {
+        if (value === null) {
           return "···"
         }
-        return noteName(data);
+        return noteName(value);
       case "volume":
-        if (data === null) {
+        if (value === null) {
           return "··"
         }
-        return data.toString(16);
+        return value.toString(16);
       case "parameter":
-        if (data === null) {
+        if (value === null) {
           return "000"
         }
-        return `000${data.toString(16)}`.substr(-3);
+        return `000${value.toString(16)}`.substr(-3);
       case "instrument":
-        if (data === null) {
+        if (value === null) {
           return " "
         }
-        return data;
+        return value;
 
       default:
-        return data;
+        return value;
     }
   }
 
-  function getData(row, column) {
+  function getData(events, row, column) {
     const cindex = trackColumns.indexOf(column);
-    if (cindex > -1 && data.length > row && data[row].length > cindex) {
-      return formatDataValue(column, data[row][cindex]);
+    if (cindex > -1 && events && events.length > row && events[row].length > cindex) {
+      return formatDataValue(column, events[row][cindex]);
     }
     return "?"
   }
@@ -87,7 +88,7 @@
 	<div class="row w-full { $active ? 'active' : ''}">
 		{#each trackColumns as column,index}
 			<div class="{column}">
-				{ getData(row, column) }
+				{ getData($data, row, column) }
 			</div>
 		{/each}
 	</div>
