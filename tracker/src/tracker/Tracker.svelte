@@ -1,19 +1,21 @@
 <script lang="ts">
   import Hotkey from "../components/Hotkey.svelte";
   import TrackDisplay from "./TrackDisplay.svelte";
-  import { trackCount, trackWidth } from "./constants";
-  import { cursorRow, cursorTrack, cursorTrackColumn, changeRow, changeTrackColumn, changeTrack } from "./store";
+  import { trackWidth } from "./constants";
+  import { cursorRow, changeRow, changeTrackColumn, changeTrack } from "./trackerStore";
   import { derived, writable } from "svelte/store";
+  import { trackCount } from "../songStore";
+  import TrackerCursor from "./TrackerCursor.svelte";
 
   let trackerHeight = writable(0);
 
-  let scrollTop = derived([cursorRow, trackerHeight], ([$row,$height]) => {
-    return ($height/2 - 8) - $row * 16 -2;
+  let scrollTop = derived([cursorRow, trackerHeight], ([$row, $height]) => {
+    return ($height / 2 - 8) - $row * 16 - 2;
   });
 
   let scrollLeft = 0;
 
-  const tracks = [...new Array(trackCount)].map((_, i) => i);
+  const tracks = [...new Array($trackCount)].map((_, i) => i);
 
 
 </script>
@@ -50,9 +52,6 @@
 				{ track }
 			</div>
 		{/each}
-		<div class="absolute v-center w-full frame raised-v-narrow">
-			abss
-		</div>
-		TRACKER { $cursorRow } { $cursorTrack }/{$cursorTrackColumn}
+		<TrackerCursor/>
 	</div>
 </div>
