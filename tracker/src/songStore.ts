@@ -1,18 +1,7 @@
 import {writable, Writable} from "svelte/store";
 import testsong from './music/testsong.json';
 import {trackColumns} from "./tracker/constants";
-
-interface InstrumentDefinition {
-	name: string
-	program: string[]
-}
-
-type InstrumentListener = (i: InstrumentDefinition) => void
-
-interface Instrument {
-	set: (i: InstrumentDefinition) => void
-	subscribe: (cb: InstrumentListener) => () => void
-}
+import {reactiveInstrument, setInstrument} from "./instrumentStore";
 
 type Event = (number | null)[];
 type TrackEvents = Event[]
@@ -33,8 +22,6 @@ export const trackCount: Writable<number> = writable(0);
 export const patternOrder: Writable<number[]> = writable([]);
 export const patterns: Pattern[] = [];
 export const patternCount: Writable<number> = writable(0);
-export const instruments: Instrument[] = [];
-export const instrumentCount: Writable<number> = writable(0);
 
 function expandTrack(length) {
 	return (track) => {
@@ -57,28 +44,6 @@ function expandTrack(length) {
 	}
 }
 
-function reactiveInstrument(initialnstrument: InstrumentDefinition): Instrument {
-	let instrument = initialnstrument;
-
-	function set(newI: InstrumentDefinition) {
-		instrument = newI;
-	}
-
-	const listeners = [];
-
-	function subscribe(cb: (i: InstrumentDefinition) => void): () => void {
-		listeners.push(cb);
-		return () => {
-			listeners.splice(listeners.indexOf(cb), 1)
-		}
-	}
-
-	return {
-		set,
-		subscribe
-	}
-}
-
 export function loadSong(songdata) {
 	patternOrder.set(songdata.patternOrder)
 	for (let p of songdata.patterns) {
@@ -89,10 +54,9 @@ export function loadSong(songdata) {
 	}
 	patternCount.set(patterns.length);
 	trackCount.set(songdata.tracks);
-	for (let i of songdata.instruments) {
-		instruments.push(reactiveInstrument(i))
+	for (let i = 0; i < songdata.instruments.length; i++) {
+		setInstrument(i, reactiveInstrument(songdata.instruments[i]))
 	}
-	instrumentCount.set(instruments.length);
 }
 
 export function updatePattern(pattern, track, row, col, value): void {

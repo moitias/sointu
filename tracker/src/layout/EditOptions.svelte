@@ -1,7 +1,7 @@
 <script>
   import SpinnerFrame from "../components/SpinnerFrame.svelte";
-  import { octave, displayPattern, selectedInstrument } from "../tracker/trackerStore";
-  import { patternCount, instrumentCount } from "../songStore";
+  import { octave, displayPattern } from "../tracker/trackerStore";
+  import { patternCount } from "../songStore";
 </script>
 <style>
     .row {
@@ -15,7 +15,6 @@
 <div>
 	<div class="row w-full">
 		<SpinnerFrame bind:value={$octave} min={0} max={8}>Octave</SpinnerFrame>
-		<SpinnerFrame bind:value={$selectedInstrument} min={0} max={$instrumentCount-1}>Instrument</SpinnerFrame>
 		<SpinnerFrame bind:value={$displayPattern} min={0} max={$patternCount-1}>Pattern</SpinnerFrame>
 	</div>
 </div>

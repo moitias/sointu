@@ -13,11 +13,12 @@
 
 /* set up basic fonts and colors */
 html {
-    font-family: VT323,monospace;
+    font-family: VT323, monospace;
     line-height: 0.9em;
     font-size: 20px;
     background: black;
     color: white;
+    user-select: none;
 }
 
 /* editable fields */
@@ -113,4 +114,33 @@ div[contenteditable$="true"]:focus {
 
 .flex {
     display: flex;
+}
+
+.flex-fill {
+    flex: 1 1 auto;
+}
+
+.p-1 {
+    padding: 1px;
+}
+
+.p-2 {
+    padding: 2px;
+}
+
+.p-4 {
+    padding: 4px;
+}
+
+
+.center-items {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
 }

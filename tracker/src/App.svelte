@@ -1,31 +1,28 @@
 <style>
-	#root {
-			position: fixed;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			background: #AAAAAA;
-	}
+    #root {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
 
-	#top {
-			display: flex;
-			height: 160px;
-	}
+    #top {
+        display: flex;
+        height: 180px;
+    }
 
-  #topleft {
-      flex: 1 1 auto;
-			display: flex;
-			flex-direction: column;
-  }
+    #bottom {
+        height: calc(100vh - 160px);
+    }
 
-  #topright {
-      flex: 1 1 auto;
-  }
+    .instruments {
+        flex: 0 1 20vw;
+    }
 
-	#bottom {
-			height: calc(100vh - 160px);
-	}
+    .unit {
+        flex-basis: 40vw;
+    }
 
 </style>
 
@@ -35,18 +32,21 @@
   import InstrumentDetails from "./layout/InstrumentDetails.svelte";
   import EditOptions from "./layout/EditOptions.svelte";
   import Tracker from "./tracker/Tracker.svelte";
-
+  import UnitDetails from "./layout/UnitDetails.svelte";
 </script>
 <div id="root">
 	<div id="main">
-		<div id="top">
-			<div id="topleft">
+		<div id="top" class="frame">
+			<div class="flex-fill">
 				<TitleBar/>
+				<EditOptions/>
 				<SongDetails/>
+			</div>
+			<div class="instruments">
 				<InstrumentDetails/>
 			</div>
-			<div id="topright">
-				<EditOptions/>
+			<div class="unit">
+				<UnitDetails/>
 			</div>
 		</div>
 		<div id="bottom">

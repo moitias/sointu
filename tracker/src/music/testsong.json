@@ -3,17 +3,34 @@
 	"tracks": 2,
 	"instruments": [
 		{
-			"name": "sine",
+			"name": "detuned sine",
 			"program": [
-				"osc(sin)",
-				"out"
+				{
+					"command": "osc",
+					"type": "sin",
+					"detune": 8
+				},
+				{
+					"command": "output"
+				}
 			]
 		},
 		{
 			"name": "saw",
 			"program": [
-				"osc(saw)",
-				"out"
+				{
+					"command": "osc",
+					"type": "saw"
+				},
+				{
+					"command": "filter",
+					"type": "low",
+					"frequency": 300,
+					"resonance": 0.4
+				},
+				{
+					"command": "output"
+				}
 			]
 		}
 	],

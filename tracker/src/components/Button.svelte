@@ -1,4 +1,11 @@
 <style>
+    .big {
+        font-size: 18px;
+        line-height: 16px;
+        height: 20px;
+        padding: 1px 2px;
+    }
+
     div {
         height: 16px;
         font-size: 13px;
@@ -14,10 +21,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
 
+  export let pressed = false;
+  export let big = false;
+
   const dispatch = createEventDispatcher();
 
   let hovering = false;
-  let pressed = false;
+  let pressedDown = false;
 
   function enter() {
     hovering = true;
@@ -25,20 +35,25 @@
 
   function leave() {
     hovering = false;
-    pressed = false;
+    pressedDown = false;
   }
 
   function press() {
-    pressed = true;
+    if (pressed) {
+      return
+    }
+    pressedDown = true;
   }
 
   function release() {
-    pressed = false;
+    pressedDown = false;
     dispatch("click");
   }
 
 </script>
-<div class="{ pressed ? 'lowered' : 'raised-narrow'} {hovering ? 'text-highlight' : 'text-white'}" on:mouseenter={enter}
+<div class:big
+		 class="{ (pressed || pressedDown) ? 'lowered' : 'raised-narrow'} {(hovering || pressed) ? 'text-highlight' : 'text-white'}"
+		 on:mouseenter={enter}
 		 on:mouseleave={leave} on:mousedown={press} on:mouseup={release}>
 	<slot/>
 </div>
