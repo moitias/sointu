@@ -76,4 +76,7 @@ export function getPatternValues(pattern, track, row): (number | null)[] {
 	return patterns?.[pattern].tracks?.[track].events?.[row] || [null, null, null, null];
 }
 
+export function getPatternRow(pattern, row): Event[] {
+	return patterns?.[pattern].tracks.map(t => t.events?.[row] || [null, null, null, null]);
+}
 loadSong(testsong);

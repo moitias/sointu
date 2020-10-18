@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, createEventDispatcher, onDestroy } from 'svelte';
+  import { togglePlay } from "../playerStore";
 
   const noteMap = {
     "z": "C",
@@ -20,7 +21,19 @@
   const {focusGroup, current} = focus;
 
   function pressed(e: KeyboardEvent) {
+    //console.log(e.key)
     switch (e.key) {
+      case "Alt":
+        if (e.code === "AltLeft") {
+          // TODO: handle alt-tab stop first (or figure out how to keep state properly?!?)
+          //togglePlay();
+        }
+        console.log(e);
+        e.preventDefault();
+        return
+      case " ":
+        togglePlay();
+        break;
       default:
         const mapped = noteMap[e.key];
         if (mapped) {
@@ -31,7 +44,6 @@
         } else if (e.key.length === 1 && e.key >= "a" && e.key <= "f") {
           dispatch("value", e.key.charCodeAt(0) - 87) // "a" = 97; v- 97+10
         }
-
     }
   }
 

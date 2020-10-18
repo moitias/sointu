@@ -14,6 +14,10 @@ export function changeRow(delta: number): void {
 	cursorRow.update(v => ((v + delta) + rowCount) % rowCount);
 }
 
+export function setRow(newRow: number): void {
+	cursorRow.set(newRow);
+}
+
 export function changeTrack(delta: number): void {
 	const count: number = get(trackCount);
 	cursorTrack.update(v => ((v + delta) + count) % count);
