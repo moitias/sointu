@@ -36,7 +36,7 @@
 <div class="row { active ? 'text-white' : ''}">
 	{#each trackColumns as column,index}
 		<div class="{column}">
-			{ formatDataValue(column, events[trackColumns.indexOf(column)] ?? null) }
+			{ formatDataValue(column, events?.[trackColumns.indexOf(column)] ?? null) }
 		</div>
 	{/each}
 </div>

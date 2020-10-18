@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount, createEventDispatcher, onDestroy } from 'svelte';
+  import { get } from 'svelte/store';
   import { togglePlay } from "../playerStore";
+  import { displayPattern } from "./trackerStore";
 
   const noteMap = {
     "z": "C",
@@ -32,7 +34,7 @@
         e.preventDefault();
         return
       case " ":
-        togglePlay();
+        togglePlay(get(displayPattern));
         break;
       default:
         const mapped = noteMap[e.key];

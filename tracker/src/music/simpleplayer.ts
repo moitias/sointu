@@ -14,7 +14,7 @@ function play({track, note, instrument, volume, param}) {
 	gain.connect(audioCtx.destination);
 	osc.type = "sine";
 	osc.frequency.value = freq(440, note);
-	console.log({track, note, instrument, volume, param});
+	//console.log({track, note, instrument, volume, param});
 	gain.gain.setValueAtTime(0.5 * (volume / 128), audioCtx.currentTime);
 	osc.start();
 	gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);

@@ -44,7 +44,10 @@ playing.subscribe((v) => {
 	}
 })
 
-export function togglePlay() {
+export function togglePlay(pattern?: number) {
+	if (pattern) {
+		playingPattern.set(pattern)
+	}
 	playing.update(v => !v);
 }
 
@@ -58,4 +61,8 @@ export const currentRow = {
 
 export const currentPattern = {
 	subscribe: playingPattern.subscribe
+}
+
+export function jumpToPattern(pattern: number) {
+	playingPattern.set(pattern);
 }

@@ -13,6 +13,7 @@
   } from "./trackerStore";
   import { derived, writable } from "svelte/store";
   import {
+    patterns,
     getPatternValues,
     trackCount,
     updatePattern
@@ -97,7 +98,7 @@
 				<div style="
 					 	 margin-top: {`${$scrollTop}px`};
 					 ">
-					<TrackDisplay track={track}/>
+					<TrackDisplay track={track} events={patterns[$displayPattern].tracks[track]}/>
 				</div>
 			</div>
 			<div class="absolute text-white"
