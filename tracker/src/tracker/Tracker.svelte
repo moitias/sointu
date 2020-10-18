@@ -86,7 +86,7 @@
 <Hotkey key="Tab" modifier="shift" on:click={() => changeTrack(-1)}/>
 <Hotkey key="Tab" on:click={() => changeTrack(1)}/>
 <div class="raised h-full flex">
-	<RowNumbers top={$scrollTop}/>
+	<RowNumbers pattern={$displayPattern} top={$scrollTop}/>
 	<div class="lowered black text-highlight w-full h-full relative clip" bind:clientHeight={$trackerHeight}>
 		<TrackerCursor/>
 		{#each tracks as track}
@@ -98,7 +98,7 @@
 				<div style="
 					 	 margin-top: {`${$scrollTop}px`};
 					 ">
-					<TrackDisplay track={track} events={patterns[$displayPattern].tracks[track]}/>
+					<TrackDisplay track={track} pattern={$displayPattern} events={patterns[$displayPattern].tracks[track]}/>
 				</div>
 			</div>
 			<div class="absolute text-white"

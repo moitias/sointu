@@ -1,6 +1,6 @@
 import {get, writable} from "svelte/store";
-import {rowCount, trackColumnCount} from "./constants";
-import {trackCount} from "../songStore";
+import {trackColumnCount} from "./constants";
+import {patterns, trackCount} from "../songStore";
 
 export const displayPattern = writable(0);
 export const selectedInstrument = writable(0);
@@ -12,6 +12,7 @@ export const cursorTrackColumn = writable<number>(0);
 export const octave = writable(5);
 
 export function changeRow(delta: number): void {
+	const rowCount = patterns[get(displayPattern) as number].length;
 	cursorRow.update(v => ((v + delta) + rowCount) % rowCount);
 }
 

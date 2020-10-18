@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { displayPattern } from "./trackerStore";
-
   import { patterns } from "../songStore";
 
   export let top = 0;
-  const rows = [...new Array(patterns[$displayPattern].length)].map((_, i) => i);
+  export let pattern = 0;
 </script>
 
 <style>
@@ -20,7 +18,7 @@
 </style>
 <div class="container lowered black h-full relative">
 	<div class="absolute" style="top: {top}px;">
-		{#each rows as row}
+		{#each [...new Array(patterns[pattern].length)].map((_, i) => i) as row}
 			<div class="row { row % 4 === 0 ? 'text-highlight' : 'text-white'}">{row}</div>
 		{/each}
 	</div>
