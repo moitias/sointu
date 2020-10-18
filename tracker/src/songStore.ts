@@ -17,6 +17,7 @@ interface Track {
 }
 
 interface Pattern {
+	length: number
 	tracks: Track[]
 }
 
@@ -51,6 +52,7 @@ export function loadSong(songdata) {
 	patternOrder.set(songdata.patternOrder)
 	for (let p of songdata.patterns) {
 		patterns.push({
+			length: p.length,
 			tracks: p.tracks.map(expandTrack(p.length))
 		})
 	}

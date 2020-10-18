@@ -20,6 +20,7 @@
   import TrackerCursor from "./TrackerCursor.svelte";
   import TrackerKeys from "./TrackerKeys.svelte";
   import { noteValue } from "../music/notes";
+  import RowNumbers from "./RowNumbers.svelte";
 
   let trackerHeight = writable(0);
 
@@ -81,8 +82,9 @@
 <Hotkey key="ArrowRight" on:click={() => changeTrackColumn(1)}/>
 <Hotkey key="Tab" modifier="shift" on:click={() => changeTrack(-1)}/>
 <Hotkey key="Tab" on:click={() => changeTrack(1)}/>
-<div class="raised h-full">
-	<div class="lowered black text-highlight h-full relative clip" bind:clientHeight={$trackerHeight}>
+<div class="raised h-full flex">
+	<RowNumbers top={$scrollTop}/>
+	<div class="lowered black text-highlight w-full h-full relative clip" bind:clientHeight={$trackerHeight}>
 		<TrackerCursor/>
 		{#each tracks as track}
 			<div class="absolute lowered"
