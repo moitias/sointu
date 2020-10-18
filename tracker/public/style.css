@@ -57,6 +57,13 @@ div[contenteditable$="true"]:focus {
     border-bottom: 2px solid #18282C;
 }
 
+.raised-narrow {
+    border-left: 1px solid #8ADBF3;
+    border-top: 1px solid #8ADBF3;
+    border-right: 1px solid #18282C;
+    border-bottom: 1px solid #18282C;
+}
+
 .raised-v {
     border-top: 2px solid #8ADBF3;
     border-bottom: 2px solid #18282C;

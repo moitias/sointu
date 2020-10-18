@@ -9,7 +9,7 @@
     changeTrack,
     cursorTrack,
     cursorTrackColumn,
-    octave, displayPattern
+    octave, displayPattern, selectedInstrument
   } from "./trackerStore";
   import { derived, writable } from "svelte/store";
   import {
@@ -67,7 +67,9 @@
 
   function addTrackerNote(note) {
     if ($cursorTrackColumn === 0) {
-      updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", noteValue($octave, note))
+      updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", noteValue($octave, note));
+      updatePattern($displayPattern, $cursorTrack, $cursorRow, "instrument", $selectedInstrument);
+      updatePattern($displayPattern, $cursorTrack, $cursorRow, "volume", 128);
     }
   }
 

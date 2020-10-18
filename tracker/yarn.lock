@@ -1686,6 +1686,11 @@ micromatch@^4.0.2:
     braces "^3.0.1"
     picomatch "^2.0.5"
 
+midi-freq@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/midi-freq/-/midi-freq-1.0.1.tgz#c4601568d2d9a4826a8052df686af4bc22a7de07"
+  integrity sha1-xGAVaNLZpIJqgFLfaGr0vCKn3gc=
+
 mime-db@1.44.0:
   version "1.44.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.44.0.tgz#fa11c5eb0aca1334b4233cb4d52f10c5a6272f92"

@@ -3,12 +3,13 @@ import {rowCount, trackColumnCount} from "./constants";
 import {trackCount} from "../songStore";
 
 export const displayPattern = writable(0);
+export const selectedInstrument = writable(0);
 
 export const cursorRow = writable(0);
 export const cursorTrack = writable<number>(0);
 export const cursorTrackColumn = writable<number>(0);
 
-export const octave = writable(4);
+export const octave = writable(5);
 
 export function changeRow(delta: number): void {
 	cursorRow.update(v => ((v + delta) + rowCount) % rowCount);
