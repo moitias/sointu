@@ -9,7 +9,7 @@
     changeTrack,
     cursorTrack,
     cursorTrackColumn,
-    octave, displayPattern, selectedInstrument
+    octave, displayPattern, selectedInstrument, editMode
   } from "./trackerStore";
   import { derived, writable } from "svelte/store";
   import {
@@ -22,6 +22,7 @@
   import TrackerKeys from "./TrackerKeys.svelte";
   import { noteValue } from "../music/notes";
   import RowNumbers from "./RowNumbers.svelte";
+  import { play } from "../music/simpleplayer";
 
   let trackerHeight = writable(0);
 
@@ -67,25 +68,39 @@
   }
 
   function addTrackerNote(note) {
-    if ($cursorTrackColumn === 0) {
-      updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", noteValue($octave, note));
-      updatePattern($displayPattern, $cursorTrack, $cursorRow, "instrument", $selectedInstrument);
-      updatePattern($displayPattern, $cursorTrack, $cursorRow, "volume", 128);
+    play({track: $cursorTrack, note: noteValue($octave, note), instrument: $selectedInstrument, volume: 128, param: 0})
+    if ($cursorTrackColumn === 0 && $editMode) {
+      if (note === null) {
+        updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", null);
+      } else {
+        updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", noteValue($octave, note));
+        updatePattern($displayPattern, $cursorTrack, $cursorRow, "instrument", $selectedInstrument);
+        updatePattern($displayPattern, $cursorTrack, $cursorRow, "volume", 128);
+      }
     }
   }
 
 </script>
 
+<style>
+    .edit {
+        border: 2px solid red;
+    }
+</style>
 <TrackerKeys
 				on:note={(event) => addTrackerNote(event.detail)}
 				on:value={(event) => addTrackerValue(event.detail)}/>
+<Hotkey key="Escape" on:click={() => editMode.update( v => !v)}/>
+<Hotkey key="Delete" on:click={() => addTrackerNote(null)}/>
+<Hotkey key="PageUp" on:click={() => changeRow(-16)}/>
+<Hotkey key="PageDown" on:click={() => changeRow(16)}/>
 <Hotkey key="ArrowUp" on:click={() => changeRow(-1)}/>
 <Hotkey key="ArrowDown" on:click={() => changeRow(1)}/>
 <Hotkey key="ArrowLeft" on:click={() => changeTrackColumn(-1)}/>
 <Hotkey key="ArrowRight" on:click={() => changeTrackColumn(1)}/>
 <Hotkey key="Tab" modifier="shift" on:click={() => changeTrack(-1)}/>
 <Hotkey key="Tab" on:click={() => changeTrack(1)}/>
-<div class="raised h-full flex">
+<div class="raised h-full flex" class:edit={$editMode}>
 	<RowNumbers pattern={$displayPattern} top={$scrollTop}/>
 	<div class="lowered black text-highlight w-full h-full relative clip" bind:clientHeight={$trackerHeight}>
 		<TrackerCursor/>

@@ -30,7 +30,6 @@
           // TODO: handle alt-tab stop first (or figure out how to keep state properly?!?)
           //togglePlay();
         }
-        console.log(e);
         e.preventDefault();
         return
       case " ":

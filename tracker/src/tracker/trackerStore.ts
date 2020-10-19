@@ -10,6 +10,7 @@ export const cursorTrack = writable<number>(0);
 export const cursorTrackColumn = writable<number>(0);
 
 export const octave = writable(5);
+export const editMode = writable(false);
 
 export function changeRow(delta: number): void {
 	const rowCount = patterns[get(displayPattern) as number].length;
