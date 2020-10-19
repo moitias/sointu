@@ -108,10 +108,8 @@ export function saveSong() {
 }
 
 export function resetSong() {
-	window.localStorage.clear();
-	loadSong(testsong);
-	displayPattern.set(0);
-	jumpToPattern(0);
+	window.localStorage.setItem("song", JSON.stringify(testsong));
+	window.location.reload();
 }
 
 const song = window.localStorage.getItem("song");
