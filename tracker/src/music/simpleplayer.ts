@@ -51,7 +51,8 @@ function playSound(track, instrument, note, volume, param) {
 	osc.stop(audioCtx.currentTime + duration)
 	tracks[track] = {
 		end: () => {
-			osc.stop(audioCtx.currentTime);
+			gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+			osc.stop(audioCtx.currentTime + 0.1);
 		}
 	}
 }
