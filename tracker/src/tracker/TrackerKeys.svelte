@@ -23,7 +23,7 @@
   const {focusGroup, current} = focus;
 
   function pressed(e: KeyboardEvent) {
-    //console.log(e.key)
+    console.log(e.key, e.code)
     switch (e.key) {
       case "Alt":
         if (e.code === "AltLeft") {
@@ -42,7 +42,7 @@
         }
         if (e.key.length === 1 && e.key >= "0" && e.key <= "9") {
           dispatch("value", e.key - "0")
-        } else if (e.key.length === 1 && e.key >= "a" && e.key <= "f") {
+        } else if (e.key.length === 1 && e.key.toLowerCase() >= "a" && e.key.toLowerCase() <= "f") {
           dispatch("value", e.key.charCodeAt(0) - 87) // "a" = 97; v- 97+10
         }
     }

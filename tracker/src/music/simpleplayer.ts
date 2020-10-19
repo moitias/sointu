@@ -37,11 +37,14 @@ function playSound(track, instrument, note, volume, param) {
 	if (tracks[track]) {
 		tracks[track].end();
 	}
+	if (note === -1) {
+		return;
+	}
 	let gain = audioCtx.createGain();
-	const duration = 0.5;
+	const duration = 1.5;
 	gain.connect(audioCtx.destination);
 	let osc = buildOsc(instrument.units, note, gain)
-	console.log({note, instrument, volume, param, osc});
+	//console.log({note, instrument, volume, param, osc});
 	gain.gain.setValueAtTime(0.5 * (volume / 128), audioCtx.currentTime);
 	osc.start();
 	gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);

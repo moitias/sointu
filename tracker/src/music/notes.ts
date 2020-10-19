@@ -1,6 +1,9 @@
 const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
 export function noteName(note: number): string {
+	if (note === -1) {
+		return "^^^"
+	}
 	const octave = Math.floor(note / 12);
 	const octaveNote = note % 12;
 	return `${`${notes[octaveNote]}-`.substr(0, 2)}${octave}`;

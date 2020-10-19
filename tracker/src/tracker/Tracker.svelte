@@ -68,10 +68,18 @@
   }
 
   function addTrackerNote(note) {
-    play({track: $cursorTrack, note: noteValue($octave, note), instrument: $selectedInstrument, volume: 128, param: 0})
+    if (note !== null && note !== -1) {
+      play({
+        track: $cursorTrack,
+        note: noteValue($octave, note),
+        instrument: $selectedInstrument,
+        volume: 128,
+        param: 0
+      })
+    }
     if ($cursorTrackColumn === 0 && $editMode) {
-      if (note === null) {
-        updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", null);
+      if (note === null || note === -1) {
+        updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", note);
       } else {
         updatePattern($displayPattern, $cursorTrack, $cursorRow, "note", noteValue($octave, note));
         updatePattern($displayPattern, $cursorTrack, $cursorRow, "instrument", $selectedInstrument);
@@ -91,6 +99,7 @@
 <TrackerKeys
 				on:note={(event) => addTrackerNote(event.detail)}
 				on:value={(event) => addTrackerValue(event.detail)}/>
+<Hotkey key="CapsLock" on:click={() => addTrackerNote(-1)}/>
 <Hotkey key="Escape" on:click={() => editMode.update( v => !v)}/>
 <Hotkey key="Delete" on:click={() => addTrackerNote(null)}/>
 <Hotkey key="PageUp" on:click={() => changeRow(-16)}/>
