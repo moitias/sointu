@@ -77,6 +77,7 @@
         updatePattern($displayPattern, $cursorTrack, $cursorRow, "instrument", $selectedInstrument);
         updatePattern($displayPattern, $cursorTrack, $cursorRow, "volume", 128);
       }
+      changeRow(1);
     }
   }
 
