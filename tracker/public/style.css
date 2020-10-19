@@ -144,3 +144,8 @@ div[contenteditable$="true"]:focus {
 .justify-between {
     justify-content: space-between;
 }
+
+.disabled {
+    color: #888;
+    cursor: not-allowed;
+}

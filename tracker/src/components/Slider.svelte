@@ -1,12 +1,13 @@
 <script>
   export let value;
+  export let disabled = false;
   export let type = "float";
   export let min;
   export let max;
   let barWidth = 0;
 
   function handleMouseMove(e) {
-    if (e.buttons === 1) {
+    if (e.buttons === 1 && !disabled) {
       const rect = e.currentTarget.getBoundingClientRect()
       const val = e.clientX - rect.x - 4;
       if (val >= 0 && val <= barWidth - 8) {
@@ -24,6 +25,7 @@
         height: 12px;
         width: 100%;
         position: relative;
+        cursor: pointer;
     }
 
     .bar {
@@ -44,6 +46,10 @@
         pointer-events: none;
     }
 
+    .disabled {
+        background: #333;
+    }
+
     .value {
         flex: 0 0 32px;
         text-align: center;
@@ -55,7 +61,7 @@
 		{value}
 	</div>
 	<div class="container flex-fill" on:mousemove={handleMouseMove}>
-		<div class="bar" bind:clientWidth={barWidth}></div>
-		<div class="slider" style="left: {((value-min)/(max-min))*(barWidth)}px;"></div>
+		<div class:disabled class="bar" bind:clientWidth={barWidth}></div>
+		<div class:disabled class="slider" style="left: {((value-min)/(max-min))*(barWidth)}px;"></div>
 	</div>
 </div>

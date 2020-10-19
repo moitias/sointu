@@ -17,11 +17,13 @@
         cursor: pointer;
         user-select: none;
     }
+
 </style>
 <script>
   import { createEventDispatcher } from "svelte";
 
   export let pressed = false;
+  export let disabled = false;
   export let big = false;
 
   const dispatch = createEventDispatcher();
@@ -39,7 +41,7 @@
   }
 
   function press() {
-    if (pressed) {
+    if (pressed || disabled) {
       return
     }
     pressedDown = true;
@@ -52,6 +54,7 @@
 
 </script>
 <div class:big
+		 class:disabled
 		 class="{ (pressed || pressedDown) ? 'lowered' : 'raised-narrow'} {(hovering || pressed) ? 'text-highlight' : 'text-white'}"
 		 on:mouseenter={enter}
 		 on:mouseleave={leave} on:mousedown={press} on:mouseup={release}>

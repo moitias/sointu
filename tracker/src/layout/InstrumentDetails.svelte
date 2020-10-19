@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<div id="stack">
-		{#each instruments[$selectedInstrument].program() as unit,index}
+		{#each instruments[$selectedInstrument].units() as unit,index}
 			<div class="unit flex w-full {$currentUnit === index ? 'text-highlight' : ''}"
 					 on:click={() => currentUnit.set(index)}>
 				<div>

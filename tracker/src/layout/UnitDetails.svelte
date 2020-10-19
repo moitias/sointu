@@ -11,7 +11,7 @@
 	{:else}
 		<div>INSTRUMENT { $selectedInstrument } UNIT #{ $currentUnit } DETAILS</div>
 		<div class="h-full">
-			<UnitEditor unit={instruments[$selectedInstrument].program()[$currentUnit] }/>
+			<UnitEditor unit={instruments[$selectedInstrument].units()[$currentUnit] }/>
 		</div>
 	{/if}
 </div>

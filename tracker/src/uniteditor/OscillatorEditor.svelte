@@ -18,11 +18,12 @@
 <div>
 	<div>Oscillator</div>
 	<div class="flex justify-between">
-		<Button big pressed={unit.type === "sin"}>SINE</Button>
-		<Button big pressed={unit.type === "saw"}>TRI/SAW</Button>
-		<Button big pressed={unit.type === "pulse"}>PULSE</Button>
-		<Button big pressed={unit.type === "noise"}>NOISE</Button>
-		<Button big pressed={unit.type === "gate"}>GATE</Button>
+		<Button big pressed={unit.type === "sine"}>SINE</Button>
+		<Button big pressed={unit.type === "triangle"}>TRI</Button>
+		<Button big pressed={unit.type === "sawtooth"}>SAW</Button>
+		<Button big pressed={unit.type === "square"}>PULSE</Button>
+		<Button disabled big pressed={unit.type === "noise"}>NOISE</Button>
+		<Button disabled big pressed={unit.type === "gate"}>GATE</Button>
 	</div>
 	<div class="flex center-items">
 		<div class="title">

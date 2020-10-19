@@ -2,6 +2,7 @@ import {writable, Writable} from "svelte/store";
 import testsong from './music/testsong.json';
 import {trackColumns} from "./tracker/constants";
 import {reactiveInstrument, setInstrument} from "./instrumentStore";
+import {setPlayerInstrument} from "./music/simpleplayer";
 
 type Event = (number | null)[];
 type TrackEvents = Event[]
@@ -56,6 +57,7 @@ export function loadSong(songdata) {
 	trackCount.set(songdata.tracks);
 	for (let i = 0; i < songdata.instruments.length; i++) {
 		setInstrument(i, reactiveInstrument(songdata.instruments[i]))
+		setPlayerInstrument(i, songdata.instruments[i]);
 	}
 }
 

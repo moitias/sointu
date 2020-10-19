@@ -1,8 +1,8 @@
 import {writable, Writable} from "svelte/store";
 
-interface InstrumentDefinition {
+export interface InstrumentDefinition {
 	name: string
-	program: string[]
+	units: string[]
 }
 
 type InstrumentListener = (i: InstrumentDefinition) => void
@@ -11,7 +11,7 @@ interface Instrument {
 	set: (i: InstrumentDefinition) => void
 	subscribe: (cb: InstrumentListener) => () => void
 	name: () => string
-	program: () => string[]
+	units: () => string[]
 }
 
 export const instruments: Instrument[] = [];
@@ -39,7 +39,7 @@ export function reactiveInstrument(initialnstrument: InstrumentDefinition): Inst
 		set,
 		subscribe,
 		name: () => instrument.name,
-		program: () => [...instrument.program],
+		units: () => [...instrument.units],
 	}
 }
 

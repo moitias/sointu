@@ -4,10 +4,10 @@
 	"instruments": [
 		{
 			"name": "detuned sine",
-			"program": [
+			"units": [
 				{
 					"command": "osc",
-					"type": "sin",
+					"type": "sine",
 					"detune": 8
 				},
 				{
@@ -17,10 +17,10 @@
 		},
 		{
 			"name": "saw",
-			"program": [
+			"units": [
 				{
 					"command": "osc",
-					"type": "saw"
+					"type": "triangle"
 				},
 				{
 					"command": "filter",
