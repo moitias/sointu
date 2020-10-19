@@ -1,8 +1,10 @@
-import {writable, Writable} from "svelte/store";
+import {get, writable, Writable} from "svelte/store";
 import testsong from './music/testsong.json';
 import {trackColumns} from "./tracker/constants";
-import {reactiveInstrument, setInstrument} from "./instrumentStore";
+import {instruments, reactiveInstrument, setInstrument} from "./instrumentStore";
 import {setPlayerInstrument} from "./music/simpleplayer";
+import {displayPattern} from "./tracker/trackerStore";
+import {jumpToPattern} from "./playerStore";
 
 type Event = (number | null)[];
 type TrackEvents = Event[]
@@ -46,6 +48,7 @@ function expandTrack(length) {
 }
 
 export function loadSong(songdata) {
+	console.log("LOADING", songdata);
 	patternOrder.set(songdata.patternOrder)
 	for (let p of songdata.patterns) {
 		patterns.push({
@@ -82,4 +85,38 @@ export function getPatternRow(pattern, row): Event[] {
 	return patterns?.[pattern].tracks.map(t => t.events?.[row] || [null, null, null, null]);
 }
 
-loadSong(testsong);
+export function exportSong() {
+	return {
+		name,
+		tracks: get(trackCount),
+		instruments: instruments.map(i => ({
+			name: i.name(),
+			units: i.units()
+		})),
+		patterns: patterns.map(p => ({
+			length: p.length,
+			tracks: p.tracks.map(t => t.events.map((e, i) => [i, ...e]))
+		})),
+		patternOrder: get(patternOrder),
+		loop: false,
+		loopStart: 0
+	}
+}
+
+export function saveSong() {
+	window.localStorage.setItem("song", JSON.stringify(exportSong()));
+}
+
+export function resetSong() {
+	window.localStorage.clear();
+	loadSong(testsong);
+	displayPattern.set(0);
+	jumpToPattern(0);
+}
+
+const song = window.localStorage.getItem("song");
+if (song) {
+	loadSong(JSON.parse(song));
+} else {
+	loadSong(testsong);
+}

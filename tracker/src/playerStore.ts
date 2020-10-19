@@ -1,5 +1,5 @@
 import {get, writable} from "svelte/store";
-import {getPatternRow, patterns} from "./songStore";
+import {getPatternRow, patterns, saveSong} from "./songStore";
 import {cursorRow, setRow} from "./tracker/trackerStore";
 import {emitData} from "./emitter";
 
@@ -45,6 +45,8 @@ playing.subscribe((v) => {
 })
 
 export function togglePlay(pattern?: number) {
+	// save on play.. TODO: figure this out smarter
+	saveSong();
 	if (pattern) {
 		playingPattern.set(pattern)
 	}
