@@ -16,6 +16,16 @@ func (s *SynthState) Render(buffer []float32) int {
   return int(ret)
 }
 
+func (s *SynthState) SetCommands(c [2048]byte) {
+  pk := *((*[2048]C.uchar)(unsafe.Pointer(&c)))
+  s.Commands = pk
+}
+
+func (s *SynthState) SetValues(c [16384]byte) {
+  pk := *((*[16384]C.uchar)(unsafe.Pointer(&c)))
+  s.Values = pk
+}
+
 func (s *SynthState) Trigger(voice int,note int) {
   fmt.Printf("Calling Trigger...\n")
   s.Synth.Voices[voice] = C.Voice{}
