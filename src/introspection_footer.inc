@@ -12,9 +12,11 @@ SECT_DATA(introscn)
         dd 0
 %endif
 
-%ifdef MAX_SAMPLES
-    EXPORT MANGLE_DATA(su_max_samples)
-         dd MAX_SAMPLES
+%ifndef SU_DISABLE_PLAYER
+    %ifdef MAX_SAMPLES
+        EXPORT MANGLE_DATA(su_max_samples)
+             dd MAX_SAMPLES
+    %endif
 %endif
 
 ; Arithmetic opcode ids

@@ -72,7 +72,7 @@ extern void CALLCONV su_load_gmdls(void);
 // modulated to be become infinite, this function might return 0 i.e. not render
 // any samples. If you try to call this with your buffer until the whole buffer
 // is filled, you will be stuck in an infinite loop.
-extern int CALLCONV su_render_samples(SynthState*, float* buffer, int maxsamples);
+extern int CALLCONV su_render_samples(float* buffer, int maxsamples, SynthState*);
 
 // Arithmetic opcode ids
 extern const int su_add_id;
