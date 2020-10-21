@@ -11,7 +11,7 @@ type SynthState = C.SynthState
 
 func (s *SynthState) Render(buffer []float32) int {
   fmt.Printf("Calling Render...\n")
-  var ret = C.su_render_samples(s,(*C.float)(&buffer[0]),C.int(len(buffer)))
+  var ret = C.su_render_samples((*C.float)(&buffer[0]),C.int(len(buffer)),s)
   fmt.Printf("Returning from Render...\n")
   return int(ret)
 }
